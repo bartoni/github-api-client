@@ -1,6 +1,6 @@
 package com.github.apiclient.controller;
 
-import com.github.apiclient.exception.GitHubApiValidationException;
+import com.github.apiclient.exception.GitHubApiClientValidationException;
 import com.github.apiclient.model.dto.UserDTO;
 import com.github.apiclient.service.UserService;
 
@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping("/{login}")
     public UserDTO getUserInfo(@PathVariable("login") String login) {
         if (login.isBlank()) {
-            throw new GitHubApiValidationException();
+            throw new GitHubApiClientValidationException();
         }
         logger.info("Received request to get user info for login: {}", login);
 
