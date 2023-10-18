@@ -8,7 +8,7 @@
 		<version>3.1.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.recrutation</groupId>
+	<groupId>com</groupId>
 	<artifactId>github-api-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>github-api-client</name>
@@ -26,12 +26,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate.validator</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>6.0.10.Final</version>
 		</dependency>
 	</dependencies>
 

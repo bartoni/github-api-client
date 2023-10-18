@@ -1,21 +1,18 @@
 package com.github.apiclient.controller;
 
+import com.github.apiclient.exception.GitHubApiValidationException;
 import com.github.apiclient.model.dto.UserDTO;
 import com.github.apiclient.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotBlank;
-
 @RestController
 @RequestMapping("/users")
-@Validated
 public class UserController {
 
     private final UserService userService;
@@ -32,7 +29,10 @@ public class UserController {
      * @return UserDTO containing publicly available information about the user with custom calculations field
      */
     @GetMapping("/{login}")
-    public UserDTO getUserInfo(@PathVariable("login") @NotBlank String login) {
+    public UserDTO getUserInfo(@PathVariable("login") String login) {
+        if (login.isBlank()) {
+            throw new GitHubApiValidationException();
+        }
         logger.info("Received request to get user info for login: {}", login);
 
         return userService.getUserInfo(login);

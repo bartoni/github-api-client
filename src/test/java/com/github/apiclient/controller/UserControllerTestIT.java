@@ -4,11 +4,13 @@ import com.github.apiclient.model.dto.UserDTO;
 import com.github.apiclient.service.UserService;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.client.RestTemplate;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -25,6 +27,9 @@ class UserControllerTestIT {
     @MockBean
     private UserService userService;
 
+    @MockBean
+    private RestTemplate restTemplate;
+
     @Test
     void testGetUserInfo() throws Exception {
         String login = "testuser";
@@ -38,5 +43,14 @@ class UserControllerTestIT {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.login", is(login)));
+    }
+
+    @Test
+    void testGetUserInfo_throwsException_whenLoginBlank() throws Exception {
+        String login = " ";
+
+        mockMvc.perform(get("/users/{login}", login)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
     }
 }
