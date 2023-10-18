@@ -1,7 +1,8 @@
 package com.github.apiclient.service.impl;
 
+import com.github.apiclient.model.Login;
 import com.github.apiclient.model.dto.UserDTO;
-import com.github.apiclient.repository.UserRepository;
+import com.github.apiclient.repository.LoginRepository;
 import com.github.apiclient.service.GitHubApiClient;
 import com.github.apiclient.model.GitHubUser;
 
@@ -19,12 +20,10 @@ class UserServiceImplTest {
 
     @InjectMocks
     private UserServiceImpl userService;
-
     @Mock
     private GitHubApiClient apiClient;
-
     @Mock
-    private UserRepository userRepository;
+    private LoginRepository loginRepository;
 
     @Test
     void getUserInfo() {
@@ -53,6 +52,7 @@ class UserServiceImplTest {
         assertEquals("2023-10-18", userDTO.getCreatedAt());
         assertEquals("3.12", userDTO.getCalculations());
 
-        verify(userRepository, times(1)).incrementRequestCount("testuser");
+        verify(loginRepository, times(1)).findById("testuser");
+        verify(loginRepository, times(1)).save(any(Login.class));
     }
 }
