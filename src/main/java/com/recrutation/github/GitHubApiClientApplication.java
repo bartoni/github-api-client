@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
-public class EmpikApplication {
+public class GitHubApiClientApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EmpikApplication.class, args);
+		SpringApplication.run(GitHubApiClientApplication.class, args);
 	}
 
 	@Bean
