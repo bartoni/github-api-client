@@ -29,8 +29,4 @@ public class Login {
         ++this.requestCount;
         return this;
     }
-
-    public int getRequestCount() {
-        return requestCount;
-    }
 }
