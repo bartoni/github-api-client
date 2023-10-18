@@ -23,7 +23,7 @@ public class UserController {
      * Get user information for a GitHub user.
      *
      * @param login GitHub user account login.
-     * @return UserDTO containing publicly available information about the user.
+     * @return UserDTO containing publicly available information about the user with custom calculations field
      */
     @GetMapping("/users/{login}")
     public UserDTO getUserInfo(@PathVariable("login") String login) {
