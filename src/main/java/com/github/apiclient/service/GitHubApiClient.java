@@ -24,7 +24,7 @@ public class GitHubApiClient {
 
     private static final Logger logger = LoggerFactory.getLogger(GitHubApiClient.class);
     public final String usersApiUrl;
-    public String apiToken = "token";
+    public final String apiToken;
     private final RestTemplate restTemplate;
 
     public GitHubApiClient(RestTemplate restTemplate,
